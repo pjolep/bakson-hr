@@ -23,7 +23,6 @@
     "karma-ng-html2js-preprocessor": "^0.1.2",
     "protractor": "^2.1.0",
     "shelljs": "^0.2.6",
-    "express" : "latest",
     "body-parser" : "latest",
     "underscore" : "latest",
     "path" : "latest"
@@ -48,6 +47,7 @@
     "grunt-pm2-deploy": "^0.2.0",
     "grunt-contrib-watch": "^0.6.1",
     "jsonfile": "^2.2.1",
-    "moment": "latest"
+    "moment": "latest",
+    "express" : "latest"
   }
 }
