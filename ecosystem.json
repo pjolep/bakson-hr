@@ -1,0 +1,6 @@
+{
+  "apps" : [{
+    "name"      : "Employee",
+    "script"    : "express.js"
+  }]
+}
