@@ -13,7 +13,6 @@
     "grunt-pm2-deploy": "^0.2.0",
     "grunt-sass": "^1.1.0-beta",
     "grunt-serve": "^0.1.6",
-    "http-server": "^0.6.1",
     "jasmine-core": "^2.3.4",
     "karma": "~0.12",
     "karma-chrome-launcher": "^0.1.12",
@@ -21,11 +20,7 @@
     "karma-jasmine": "^0.3.5",
     "karma-junit-reporter": "^0.2.2",
     "karma-ng-html2js-preprocessor": "^0.1.2",
-    "protractor": "^2.1.0",
-    "shelljs": "^0.2.6",
-    "body-parser" : "latest",
-    "underscore" : "latest",
-    "path" : "latest"
+    "protractor": "^2.1.0"
   },
   "engines": {
     "node": "0.10.31"
@@ -48,6 +43,11 @@
     "grunt-contrib-watch": "^0.6.1",
     "jsonfile": "^2.2.1",
     "moment": "latest",
-    "express" : "latest"
+    "express" : "latest",
+    "shelljs": "^0.2.6",
+    "body-parser" : "latest",
+    "underscore" : "latest",
+    "path" : "latest",
+    "http-server": "^0.6.1"
   }
 }
