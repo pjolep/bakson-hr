@@ -1,1 +1,1 @@
-application for managing employees vacation
+Application for managing employees vacation
