@@ -1,0 +1,13 @@
+//import variables
+@import 'variables/pallete';
+
+@import 'mixins/fontface';
+
+//import partials
+@import 'partials/reset.scss';
+@import 'partials/placeholders';
+@import 'partials/typography.scss';
+
+//import main layout components
+@import 'layoutComponents/layoutComponents.scss';
+

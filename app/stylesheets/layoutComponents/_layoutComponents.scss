@@ -1,0 +1,647 @@
+main {
+  @extend %clearfix;
+  @extend %forceHeight;
+  &.active {
+    .sideBar {
+      width: 0;
+      padding: 0;
+      transition: 0.2s ease-in-out;
+      h3{
+        display: none;
+      }
+      form > *{
+        display: none;
+      }
+      ul > li{
+        display: none;
+      }
+    }
+    .rightContent{
+      width: 100%;
+    }
+    .sidebarTag {
+      left:0;
+      transition: 0.2s ease-in-out;
+    }
+    .sidebarTag{
+      width: 200px;
+    }
+  }
+}
+
+html, body,{
+  height: 100%;
+  font-weight: 100;
+}
+
+label{
+  @extend %ticketmasterFontBold;
+}
+
+.inputError{
+  border-color: $tint-inputError;
+}
+
+.dateInputError{
+  border-color: #ff0722;
+}
+
+.datesAndcomments{
+
+  &.active {
+    display: none;
+  }
+}
+
+*{
+  font-weight: 100;
+}
+
+main{
+  display: flex;
+  align-content: stretch;
+}
+
+.sideBar {
+  height: 100%;
+  float: left;
+  width: 20%;
+  padding-left: 15px;
+  padding-right: 15px;
+  background-color: $tint-mainBg;
+  box-shadow: 2px 2px 2px black;
+  border-right: 1px solid $tint-borderColor;
+  overflow: scroll;
+  padding-top: 80px;
+  &::-webkit-scrollbar{
+    background-color: lighten($tint-mainBg, 5);
+  }
+  &::-webkit-scrollbar-corner{
+    background-color: lighten($tint-mainBg, 5);
+  }
+  &::-webkit-scrollbar-thumb{
+    background-color: lighten($tint-mainBg, 6);
+    border: 1px solid $tint-borderColor;
+  }
+  h3 {
+    text-align: center;
+    color: #ffffff;
+    border-bottom: 1px solid $tint-borderColor;
+    width: 100%;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-weight: 100;
+    @extend %ticketmasterFontBold;
+  }
+
+  input {
+    width: 97%;
+    margin-bottom: 5px;
+    @extend %inputs;
+    @extend %focus;
+    padding: 5px;
+    &::-webkit-input-placeholder{
+      text-align: center;
+      color: white;
+      font-weight: 500;
+      @extend %ticketmasterFontRegular;
+    }
+  }
+
+  ul {
+    @extend %resetList;
+    padding-top: 15px;
+    li{
+      &:first-child{
+        border-top: 1px solid $tint-borderColor;
+      }
+      @extend %resetList;
+      padding: 15px 29px;
+      color:white;
+      border-bottom: 1px solid $tint-borderColor;
+      transition: 0.2s ease-in-out;
+      @extend %ticketmasterFontRegular;
+      &:first-child{
+        border-top: 1px solid $tint-borderColor;
+      }
+      &:hover {
+        background-color:#2C473E;
+        transition: 0.2s ease-in-out;
+        border-left: 4px solid #23A76D;
+        cursor: hand;
+      }
+    }
+  }
+}
+
+.logoImg{
+  text-align: center;
+  img{
+    width: 50%;
+    margin-bottom: -5px;
+  }
+}
+
+fieldset {
+  display: block;
+  margin-left: 2px;
+  margin-right: 2px;
+  padding-top: 0.35em;
+  padding-bottom: 0.625em;
+  padding-left: 0.75em;
+  padding-right: 0.75em;
+  border: 2px solid white;
+}
+
+.sidebarTag {
+    position: absolute;
+    padding: 0;
+    left: 0;
+    color: white;
+    text-align: center;
+    top: 3%;
+    margin-top: -30px;
+    background-color: black;
+    transition: 0.2s ease-in-out;
+    width: calc(20% + 60px);
+    padding-right: 60px;
+    height: 70px;
+  &:hover{
+    transition: 0.2s ease-in-out;
+    background-color: lighten(black, 15%);
+  }
+  i{
+    color: white;
+  }
+  .logo{
+        display: inline-block;
+        background: url(../assets/images/bakson-logo-negative.png) no-repeat;
+        background-size: 120px;
+        background-position: center;
+        height: 100%;
+        width: 100%;
+        background-repeat: none;
+        background-color: #2C473E;
+  }
+  span{
+        display: inline-block;
+        position: absolute;
+        top: 22px;
+        right: 22px;
+  }
+
+}
+
+.rightContent {
+  @extend %forceHeight;
+  background:$tint-lightMainBg;
+  float:right;
+  width:80%;
+  overflow:auto;
+}
+
+.mainMenu {
+  border: 1px solid $tint-borderColor;
+  background-color: $tint-mainBg;
+  box-shadow: 2px 2px 2px black;
+  border-radius: 8px;
+  color: white;
+  transition: 0.2s ease-in-out;
+}
+
+.text1{
+  width: 100%;
+  border-radius: 8px;
+  padding: 4px;
+}
+
+
+.cardTab {
+  background-color: $tint-mainBg;
+  display: inline-block;
+  padding: 21px 30px 21px 15px;
+  border-right: 1px solid $tint-borderColor;
+  height: auto;
+  margin: 0;
+  font-size: 16px;
+  color: white;
+  transition: 0.2s ease-in-out;
+  position:relative;
+  border-top: 6px solid black;
+  @extend %ticketmasterFontRegular;
+  &:hover{
+    background-color: lighten(#2C473E, 5%);
+    transition: 0.2s ease-in-out;
+    cursor: hand;
+  }
+  .closeTab {
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 8px;
+    transition: 0.2s ease-in-out;
+    color: #23A76D;
+    &:hover{
+      &:hover{
+        transition: 0.2s ease-in-out;
+        color: lighten(#23A76D, 10%);
+      }
+    }
+  }
+}
+
+.menu {
+  border-top: #ffffff;
+  background-color: $tint-mainBg;
+}
+
+
+.qwerty {
+  @extend %clearfix;
+  background-color: $tint-lightMainBg;
+  border-top: 1px solid $tint-borderColor;
+  color: white;
+  padding-left: 65px;
+  border-bottom: 1px solid $tint-borderColor;
+  padding-bottom: 20px;
+  //padding-bottom: 40px;
+  input{
+    color: black;
+    @extend %focus;
+  }
+  textarea{
+    color: black;
+    @extend %focus;
+  }
+}
+
+
+
+.qwertyColleft{
+  width: 48%;
+  float: left;
+  padding-top: 10px;
+  input{
+    width: 40%;
+    padding: 5px;
+    @extend %inputs;
+    color: white;
+  }
+  span{
+    @extend %ticketmasterFontRegular;
+  }
+
+}
+
+.qwertyColleftSub{
+  width: 64%;
+  float: right;
+}
+
+.qwertyColrightSub{
+  width: 65%;
+  float: right;
+  padding-left: 7px;
+}
+
+.qwertyColright{
+  width: 50%;
+  float: left;
+  padding-right: 60px;
+  padding-top: 10px;
+  padding-bottom: 50px;
+  form{
+    textarea{
+      display: block;
+      width: 103.6%;
+      @extend %inputs;
+    }
+  }
+  textarea{
+    display: block;
+    width: 100%;
+    border-radius: 8px;
+    font-weight: 100;
+  }
+}
+
+.activeTab {
+  background-color: #2C473E;
+  border-top: 6px solid rgb(35, 167, 109);
+  transition: 0.1s ease-in-out;
+  &:before{
+    @extend %arrow;
+  }
+}
+
+.active {
+  color: red;
+}
+
+.save{
+  label{
+    input{
+      @extend %primaryButtons;
+      transition: 0.2s ease-in-out;
+      &:hover{
+        transition: 0.2s ease-in-out;
+      }
+    }
+    button{
+      &:first-child{
+        background-color: red !important;
+      }
+      @extend %primaryButtons;
+      @extend %focus;
+    }
+  }
+  padding-bottom: 30px;
+}
+
+.addName{
+  input{
+    width: 101%;
+    margin-top: 15px;
+    font-weight: 100;
+    background-color: $tint-secondaryButtonsColor;
+    color: white;
+    border-radius: 3px;
+    //box-shadow: 1px 1px 0px rgba(0,0,0,5);
+    padding: 5px;
+    transition: 0.2s ease-in-out;
+    &:hover{
+      background-color: $tint-secondaryButtonsHover;
+      transition: 0.2s ease-in-out;
+      //box-shadow: 1px 1px 0px rgba(0,0,0,5);
+      border: 1px solid black;
+    }
+  }
+}
+
+.saveButton{
+  background-color: #b50000 !important;
+  transition: 0.5s ease-in-out !important;
+  &:hover{
+    transition: 0.5s ease-in-out !important;
+    background-color: #C64E20 !important;
+  }
+  &:focus{
+    border-color: #C64E20 !important;;
+    box-shadow: 0 1px 1px #C64E20 inset, 0 0 8px #C64E20 !important;;
+    outline: 0 none !important;
+    transition: 0.2s ease-in-out !important;
+  }
+}
+
+.nameClass{
+  input{
+    width: 100.5%;
+    @extend %inputs;
+  }
+}
+
+.clear{
+  clear: both;
+}
+
+
+.datesAndcomments{
+  color: white;
+  .addDates{
+    background-color: $tint-mainBg;
+    padding-left: 15px;
+    border-top: 1px solid $tint-borderColor;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-align: center;
+    input{
+      width: 30%;
+      @extend %focus;
+    }
+    input[type="submit"]{
+      background-color: $tint-secondaryButtonsColor;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      @extend %ticketmasterFontBold;
+      //box-shadow: 1px 1px 0px rgba(0,0,0,5);
+      transition: 0.2s ease-in-out;
+      padding: 5px;
+      &:hover{
+        background-color: $tint-secondaryButtonsHover;
+        transition: 0.2s ease-in-out;
+      }
+    }
+  }
+
+  @extend %ticketmasterFontRegular;
+  .dates{
+    width: 25%;
+    background-color: $tint-mainBg;
+    padding: 10px;
+    border-top: 1px solid $tint-borderColor;
+    border-right: 1px solid $tint-borderColor;
+    &::-webkit-scrollbar{
+      background-color: lighten($tint-mainBg, 5);
+    }
+    &::-webkit-scrollbar-corner{
+      background-color: lighten($tint-mainBg, 5);
+    }
+    &::-webkit-scrollbar-thumb{
+      background-color: lighten($tint-mainBg, 6);
+      border: 1px solid black;
+    }
+    input{
+      display: block;
+      margin-bottom: 5px;
+      @extend %ticketmasterFontRegular;
+      @extend %secondaryInputs;
+      @extend %focus;
+    }
+  }
+
+  .typeOfVacation{
+    width: 25%;
+    background-color: $tint-mainBg;
+    padding: 10px;
+    border-top: 1px solid $tint-borderColor;
+    float: left;
+
+    label{
+      select{
+        height: 41px;
+        vertical-align:top;
+        box-sizing: border-box;
+        font-weight: 100;
+        border-radius: 0;
+        margin-bottom: 5px;
+        @extend %ticketmasterFontRegular;
+        @extend %secondaryInputs;
+        @extend %focus;
+      }
+    }
+  }
+
+  .comments{
+    width: 25%;
+    background-color: $tint-mainBg;
+    padding: 10px;
+    float: right;
+    border-left: 1px solid $tint-borderColor;
+    border-right: 1px solid $tint-borderColor;
+    border-top: 1px solid $tint-borderColor;
+    &::-webkit-scrollbar{
+      background-color: lighten($tint-mainBg, 5);
+    }
+    &::-webkit-scrollbar-corner{
+      background-color: lighten($tint-mainBg, 5);
+    }
+    &::-webkit-scrollbar-thumb{
+      background-color: lighten($tint-mainBg, 6);
+      border: 1px solid black;
+    }
+    input{
+      display: block;
+      margin-bottom: 5px;
+      @extend %secondaryInputs;
+      @extend %focus;
+      @extend %ticketmasterFontRegular;
+    }
+  }
+
+  .dateTo{
+    width: 25%;
+    background-color: $tint-mainBg;
+    padding: 10px;
+    border-top: 1px solid $tint-borderColor;
+    float: left;
+    border-right: 1px solid $tint-borderColor;
+  }
+
+  input{
+    width: 100%;
+    @extend %secondaryInputs;
+    @extend %focus;
+    @extend %ticketmasterFontRegular;
+    font-weight: 100;
+    margin-bottom: 5px;
+    &:disabled{
+      background-color: #bcbcbc;
+      border-color: $ting-borderGreen;
+      color: #bcbcbc;
+      opacity: 0.2;
+      @extend %focus;
+    }
+  }
+}
+
+.dataTabs{
+  .informationTabs{
+    @extend .cardTab;
+    border-top: 1px solid $tint-borderColor;
+    background-color: #2C473E;
+    float: left !important;
+  }
+}
+
+.inputSuccess{
+  border-color: white;
+}
+
+.commentsWrap{
+  display: flex;
+  align-content: stretch;
+}
+.comments{
+  input{
+    width: 100%;
+    @extend %focus;
+  }
+}
+.numOfDays{
+  padding-top: 10px;
+  input{
+    width: 10%;
+    padding: 5px;
+    margin-top: 5px;
+    @extend %focus;
+  }
+}
+.datesAndcomments .typeOfVacation select{width: 100%}
+
+.activeSideTab{
+  background-color:#2C473E;
+  transition: 0.2s ease-in-out;
+  border-left: 4px solid #23A76D;
+}
+.arrow{
+  &:active{
+    transition: 0.2s ease-in-out;
+  }
+}
+
+::-webkit-calendar-picker-indicator { color: #23A76D;
+  &:hover{
+    background-color: $tint-mainBg;
+  }
+}
+
+.centerButtons{
+  text-align: center;
+  button{
+    @extend %primaryButtons;
+    @extend %focus;
+    padding: 5px 103px;
+    position: relative;
+    left: -23px;
+    width: 450px;
+    i{
+      position: relative;
+      left: 160px;
+    }
+  }
+  > form {
+    display: inline-block;
+    text-align: center;
+  }
+}
+
+.headerTabs{
+  text-align: right;
+}
+
+
+
+
+
+
+
+//.sidebarTag{
+//  position: absolute;
+//  padding: 0;
+//  left: 0;
+//  color: white;
+//  text-align: center;
+//  top: 3%;
+//  margin-top: -30px;
+//  background-color: #2C473E;
+//  transition: 0.2s ease-in-out;
+//  width: calc(20% + 60px);
+//  padding-right: 60px;
+//  height: 80px;
+//  .logo{
+//    display: inline-block;
+//    background: url(../assets/images/bakson-logo-negative.png) no-repeat;
+//    background-size: 120px;
+//    background-position: center;
+//    height: 100%;
+//    width: 100%;
+//    background-repeat: none;
+//  }
+//  span{
+//    display: inline-block;
+//    position: absolute;
+//    top: 28px;
+//    right: 22px;
+//  }
+//}

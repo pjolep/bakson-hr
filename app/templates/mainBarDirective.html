@@ -1,0 +1,67 @@
+<header class="headerTabs">
+    <div class="cardTab" ng-repeat="i in uiProvider.tabs | unique: 'Name'" ng-click="dataMenu()" ng-class="{'activeTab': uiProvider.selected === uiProvider.tabs[$index].Name}">
+        {{i.Name}}
+        <span ng-click="uiProvider.removeTab($index)" class="closeTab"><i class="fa fa-times"></i></span>
+    </div>
+</header>
+
+
+<section class="qwerty" ng-if="uiProvider.getData()">
+
+        <div class="qwertyColleft">
+
+            <p><label>Ime: </label><span class="qwertyColleftSub">{{uiProvider.getData().Name}}</span></p>
+            <div>
+                    <p editable-text="uiProvider.getData().Adresa"> <label>Adresa: </label><span class="qwertyColleftSub">{{uiProvider.getData().Adresa || 'Nije uneto'}} <i class="fa fa-pencil"></i></span></p>
+            </div>
+            <form>
+                <label>Datum rodjenja:
+                    <span class="qwertyColleftSub"><input type="text" name="DatumRodjenja" ng-model="uiProvider.getData().DatumRodjenja" class="text1" value="{{uiProvider.getData().DatumRodjenja | date:'dd/MM/yyyy'}}"></span>
+                </label>
+            </form>
+            <!--<p editable-text="uiProvider.getData().BrojDanaOdmora"><label>Broj dana odmora :</label><span class="qwertyColleftSub"> {{uiProvider.getData().BrojDanaOdmora || 'Nije uneto'}}<i class="fa fa-pencil"></i></span></p>-->
+            <form class="numOfDays">
+                <label>Broj Dana Odmora:
+                   <span class="qwertyColleftSub"> <input type="text" ng-model="uiProvider.getData().BrojDanaOdmora"  ng-change="uiProvider.calculateDates()"></span>
+                </label>
+            </form>
+            <!--<form>-->
+                <!--<label>Datum uzimanja odmora:-->
+                    <!--<span class="qwertyColleftSub"><input type="date" name="DatumUzimanjaOdmora" value="{{uiProvider.getData().DatumUzimanjaOdmora}}" class="text1" ng-model="uiProvider.getData().DatumUzimanjaOdmora"></span>-->
+                <!--</label>-->
+            <!--</form>-->
+        </div>
+
+
+    <div class="qwertyColright">
+            <!--<p editable-text="uiProvider.getData().BrojUzetihRadnihDana"><label>Broj uzetih radnih dana: </label><span class="qwertyColrightSub">{{uiProvider.getData().BrojUzetihRadnihDana || 'Nije uneto'}}  <i class="fa fa-pencil"></i></span></p>-->
+            <p><label>Broj uzetih radnih dana: </label><span class="qwertyColleftSub">{{uiProvider.getData().BrojUzetihRadnihDana || '0'}}</span></p>
+            <p><label>Komentar:</label></p>
+            <form>
+                <label>
+                    <textarea name="Text3" cols="20" rows="2" ng-model="uiProvider.getData().Komentar1">
+                        {{uiProvider.getData().Komentar1}}
+                    </textarea>
+                </label>
+            </form>
+        <!--<p editable-text="uiProvider.getData().OstaloDana"><label>Ostalo dana: </label><span class="qwertyColrightSub"> {{uiProvider.getData().OstaloDana || 'Nije uneto'}}  <i class="fa fa-pencil"></i></span></p>-->
+            <p><label>Ostalo dana: </label><span class="qwertyColrightSub"> {{Math.floor(uiProvider.getData().OstaloDana) || '0'}} </span></p>
+    </div>
+
+    <div class="centerButtons">
+
+        <form method="post" action="/remove" class="save">
+            <!--<input type="button" value="Izbriši zaposlenog" ng-click="removeName()">-->
+                <button class="saveButton" ng-click="removeName()">Izbrisati<i class="fa fa-times"></i></button>
+        </form>
+
+        <form method="post" action="/save" class="save" >
+                <!--<input type="button" value="Sačuvaj podatke" ng-click="saveData()">-->
+                <button ng-click="saveData()">Sačuvati<i class="fa fa-check"></i></button>
+        </form>
+
+    </div>
+
+</section>
+
+<tabs></tabs>

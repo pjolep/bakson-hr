@@ -1,0 +1,83 @@
+<div class="dataTabs">
+    <div class="informationTabs"
+         ng-if="uiProvider.getData()">
+        Nedolasci na posao
+    </div>
+</div>
+
+<div class="clear"></div>
+
+<!--ng-click="uiProvider.informationTabOpen=!uiProvider.informationTabOpen"-->
+
+<section class="datesAndcomments" ng-if="uiProvider.getData()"  ng-class={'active':uiProvider.informationTabOpen} force-window>
+
+    <div class="addDates">
+        <form>
+            <label>
+                <input type="submit" value="Dodaj tip i datum odmora" ng-click="uiProvider.addDate()" required>
+            </label>
+        </form>
+    </div>
+
+    <div class="commentsWrap clearfix" ng-style="{minHeight:commentsHeight}">
+        <div class="dates">
+            <label>Datum od:</label>
+            <form>
+                <label>
+                    <input type="text" ng-repeat="i in uiProvider.getData().DatesComments" value="{{i.date}}"
+                           ng-model="i.date"
+                           ng-class={'active':uiProvider.inputError}
+                           ng-change="uiProvider.calculateDates(); uiProvider.calculateSlobodneDane(); uiProvider.calculateSlobodneDane()"
+                           ng-model-options="{debounce: 500}"
+                           required>
+                </label>
+            </form>
+        </div>
+
+        <div class="dateTo">
+            <label>Datum do:</label>
+            <form>
+                <label>
+                    <input type="text"
+                           ng-repeat="i in uiProvider.getData().DatesComments"
+                           value="{{i.dateTo}}"
+                           ng-model="i.dateTo"
+                           ng-class={'active':uiProvider.inputError}
+                           ng-change="uiProvider.calculateDates()"
+                           required
+                           ng-disabled="i.typeOfVacation != 'Odmor'"
+                           ng-model-options="{debounce: 500}">
+                </label>
+            </form>
+        </div>
+
+        <div class="typeOfVacation">
+            <label>Tip odmora:</label>
+            <form>
+                <label>
+                    <select ng-repeat="i in uiProvider.getData().DatesComments"
+                            ng-model="i.typeOfVacation" ng-change="uiProvider.calculateSlobodneDane()"
+                            class="select">
+                        <option value="Odmor">Odmor</option>
+                        <option value="Bolovanje">Bolovanje</option>
+                        <option value="SlobodniRadniDan">Slobodni radni dan</option>
+                        <option value="NagradniDan">Nagradni dan</option>
+                    </select>
+                </label>
+            </form>
+        </div>
+
+        <div class="comments">
+            <label>Komentari:</label>
+            <form>
+                <label>
+                    <input type="text" ng-repeat="i in uiProvider.getData().DatesComments" value="{{i.comment}}"
+                           ng-model="i.comment"
+                           ng-class={'active':uiProvider.inputError}
+                           required>
+                </label>
+            </form>
+        </div>
+    </div>
+
+</section>

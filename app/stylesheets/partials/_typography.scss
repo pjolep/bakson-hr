@@ -1,0 +1,49 @@
+@include font-face('Interstate-Regular', '../assets/fonts/Interstate-Regular');
+
+
+@include font-face('Interstate-Bold', '../assets/fonts/Interstate-Bold');
+
+@include font-face('Interstate-Light', '../assets/fonts/Interstate-Light');
+
+@include font-face('Interstate-Black', '../assets/fonts/Interstate-Black');
+
+@include font-face('TMSans-Regular', '../assets/fonts/TMSans-Regular');
+@include font-face('TMSans-Bold', '../assets/fonts/TMSans-Bold');
+@include font-face('TMSans-Light', '../assets/fonts/TMSans-Light');
+@include font-face('TMSans-Ialic', '../assets/fonts/TMSans-Italic');
+
+
+%ticketmasterFont {
+  -webkit-font-smoothing:  antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+%ticketmasterFontRegular {
+  @extend %ticketmasterFont;
+  font-family: 'Interstate-Regular', 'TMSans-Bold', 'Helvetica', 'Arial';
+}
+
+%ticketmasterFontBold {
+  @extend %ticketmasterFont;
+  font-family: 'Interstate-Bold', 'TMSans-Bold', 'Helvetica', 'Arial';
+}
+
+%ticketmasterFontLight {
+  @extend %ticketmasterFont;
+  font-family: 'Interstate-Light', 'TMSans-Regular', 'Helvetica', 'Arial';
+}
+
+%ticketmasterFontItalic {
+   @extend %ticketmasterFont;
+   font-family: 'Interstate-Italic', 'TMSans-Italic', 'Helvetica', 'Arial';
+}
+
+%ticketmasterSansFontRegular {
+  @extend %ticketmasterFont;
+  font-family: 'TMSans-Regular', 'Helvetica', 'Arial';
+}
+
+%ticketmasterSansFontBold {
+  @extend %ticketmasterFont;
+  font-family: 'TMSans-Bold', 'Helvetica', 'Arial';
+}

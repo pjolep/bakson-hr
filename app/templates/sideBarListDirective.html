@@ -1,0 +1,32 @@
+
+    <!--<div class="logoImg">-->
+        <!--<img src="../assets/images/bakson-logo-negative.png">-->
+    <!--</div>-->
+
+    <h3>Dodaj Zaposlenog</h3>
+
+    <form ng-controller="sideBar">
+        <label class="nameClass">
+            <input type="text" placeholder="Ime i prezime" required
+                   ng-class={'inputError':uiProvider.inputError}
+                    ng-keyup="uiProvider.inputValidation()"
+                   ng-keydown="$event.which === 13 && addNew()">
+        </label>
+        <label class="addName">
+            <input type="button" value="Dodaj" ng-click="addNew()">
+        </label>
+    </form>
+
+    <h3>Imena Zaposlenih</h3>
+    <form>
+        <label>
+            <input type="search" placeholder="Pretraga" ng-model="query">
+        </label>
+    </form>
+
+    <ul ng-controller="sideBar">
+        <li ng-repeat="i in data2| filter:query | orderBy: 'Name' | unique: 'Name'" ng-click="addTab();"
+            ng-class="{'activeSideTab':i.Name === uiProvider.selected}">
+            {{i.Name}}
+        </li>
+    </ul>
