@@ -22,6 +22,7 @@ for(var i = 0; i < dirs.length; i++){
 }
 
 
+
 var auth = function (req, res, next) {
     function unauthorized(res) {
         res.set('WWW-Authenticate', 'Basic realm=Authorization Required');
