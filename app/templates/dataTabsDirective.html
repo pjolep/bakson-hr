@@ -3,6 +3,7 @@
          ng-if="uiProvider.getData()">
         Nedolasci na posao
     </div>
+
 </div>
 
 <div class="clear"></div>
@@ -60,11 +61,22 @@
                             class="select">
                         <option value="Odmor">Odmor</option>
                         <option value="Bolovanje">Bolovanje</option>
-                        <option value="SlobodniRadniDan">Slobodni radni dan</option>
+                        <option value="SlobodniRadniDan">Slobodni dan</option>
                         <option value="NagradniDan">Nagradni dan</option>
                     </select>
                 </label>
             </form>
+        </div>
+
+        <div class="daysTaken">
+            <label>Uzeto dana:</label>
+            <p ng-repeat="i in uiProvider.getData().DatesComments" ng-model="i.daysTaken">
+                {{i.daysTaken}}</p>
+            <!--<ul>-->
+                <!--<li ng-repeat="i in uiProvider.getData().DatesComments" ng-model="i.daysTaken">-->
+                    <!--{{i.daysTaken}}-->
+                <!--</li>-->
+            <!--</ul>-->
         </div>
 
         <div class="comments">
