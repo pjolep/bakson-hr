@@ -5,6 +5,7 @@ var app = express();
 var _ = require('underscore')._;
 var path = require('path');
 var jsonfile = require('jsonfile');
+var basicAuth = require('basic-auth');
 
 var file, dir;
 var arr = [];
@@ -12,13 +13,38 @@ var dirs = __dirname.split('/');
 
 for(var i = 0; i < dirs.length; i++){
     if(dirs[i] != 'dist'){
-        dir = __dirname + '/app';
-        file = dir + '/data.json'
+        dir = __dirname + '/app/';
+        file = dir + 'data.json';
     }else{
         dir = __dirname;
         file = 'data.json';
     }
 }
+
+
+var auth = function (req, res, next) {
+    function unauthorized(res) {
+        res.set('WWW-Authenticate', 'Basic realm=Authorization Required');
+        return res.sendStatus(401);
+    }
+
+    var user = basicAuth(req);
+
+    if (!user || !user.name || !user.pass) {
+        return unauthorized(res);
+    }
+
+    if (user.name === '123' && user.pass === '123') {
+        return next();
+    } else {
+        return unauthorized(res);
+    }
+};
+
+app.get('/', auth, function(req, res) {
+    res.sendFile(path.join(dir + 'index.html'))
+});
+
 
 app.use(express.static(dir));
 app.use(bodyParser.json());
@@ -37,17 +63,6 @@ fs.readFile(file, function(err, data){
 // 2. Parse it
 // 3. Serialize it
     arr = JSON.parse(data);
-});
-
-app.all('*', function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
-    next();
-});
-
-app.get('/', function(req,res){
-    res.sendFile(path.join(__dirname + '/index.html'));
 });
 
 app.post('/save', function(req, res) {
