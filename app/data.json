@@ -1,1 +1,28 @@
-[]
+[
+  {
+    "Name": "1234",
+    "Adresa": "",
+    "DatumRodjenja": "",
+    "BrojDanaOdmora": "",
+    "BrojUzetihRadnihDana": 0,
+    "Komentar1": "",
+    "OstaloDana": 0,
+    "DatesComments": [],
+    "Company": "",
+    "daysTaken": 0,
+    "Komentar2": ""
+  },
+  {
+    "Name": "qwer",
+    "Adresa": "",
+    "DatumRodjenja": "",
+    "BrojDanaOdmora": "",
+    "BrojUzetihRadnihDana": 0,
+    "Komentar1": "",
+    "OstaloDana": 0,
+    "DatesComments": [],
+    "Company": "",
+    "daysTaken": 0,
+    "Komentar2": ""
+  }
+]
