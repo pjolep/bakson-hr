@@ -68,7 +68,7 @@ angular.module("services").factory("uiProvider", ['$http', function ($http) {
         },
 
         countWorkingDays: function (daysArray){
-          return _countWorkingDays(daysArray);
+            return _countWorkingDays(daysArray);
         },
 
         isWorkingDay: function(day){
@@ -85,6 +85,9 @@ angular.module("services").factory("uiProvider", ['$http', function ($http) {
         addTab: function (scope, $index) {
             if (this.tabs.indexOf(scope.i) === -1) {
                 this.tabs.push(scope.i);
+                this.selected = scope.i.Name;
+            }
+            if(this.selected != scope.i.Name){
                 this.selected = scope.i.Name;
             }
         },
@@ -130,12 +133,20 @@ angular.module("services").factory("uiProvider", ['$http', function ($http) {
                 "Komentar1": "",
                 "OstaloDana": Number(""),
                 "DatesComments": [],
+                "Company" : "",
+                "daysTaken" : 0,
                 "Komentar2": ""
             };
             if (userData.Name.length === 0) {
                 this.inputError = true;
                 return false;
             }
+
+            this.selected = userData.Name;
+            if(this.selected === userData.Name){
+                this.tabs.push(userData);
+            }
+
             this.data.push(userData);
             return $http({url: '/save', method: "POST", withCredentials: true, data: userData});
         },
@@ -156,6 +167,7 @@ angular.module("services").factory("uiProvider", ['$http', function ($http) {
                 "Komentar1": this.getData().Komentar1,
                 "OstaloDana": Number(this.getData().OstaloDana),
                 "DatesComments": this.getData().DatesComments,
+                "Company" : this.getData().Company,
                 "Komentar2": this.getData().Komentar2
             };
 
@@ -193,6 +205,7 @@ angular.module("services").factory("uiProvider", ['$http', function ($http) {
                 date: $('.date').val(),
                 typeOfVacation: $('.typeOfVacation').val(),
                 comment: $('.comment').val(),
+                daysTaken : 0,
                 dateTo: $('.dateTo').val()
             });
         },
@@ -212,14 +225,23 @@ angular.module("services").factory("uiProvider", ['$http', function ($http) {
                         var days = this.getDates(datesComments[i].date, datesComments[i].dateTo);
                         var workingDays = _countWorkingDays(days);
                         sumUsedWorkingDays = sumUsedWorkingDays + workingDays;
+                        if(datesComments[i].date && datesComments[i].dateTo){
+                            if(datesComments[i].daysTaken === 0){
+                                datesComments[i].daysTaken = this.countWorkingDays(days);
+                                break;
+                            }else{
+                                datesComments[i].daysTaken = this.countWorkingDays(days);
+                            }
+                        }
                     }
                 }
             }
+
             this.getData().OstaloDana = ostaloDana - sumUsedWorkingDays;
         },
 
         typeOfVacation : function(typeOfVacation) {
-             return typeOfVacation;
+            return typeOfVacation;
         },
 
         calculateSlobodneDane : function () {
