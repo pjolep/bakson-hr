@@ -11,6 +11,7 @@ var file, dir;
 var arr = [];
 var dirs = __dirname.split('/');
 
+
 for(var i = 0; i < dirs.length; i++){
     if(dirs[i] != 'dist'){
         dir = __dirname + '/app/';
