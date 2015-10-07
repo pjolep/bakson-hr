@@ -11,7 +11,7 @@
         <div class="qwertyColleft">
 
             <p><label>Ime: </label><span class="qwertyColleftSub">{{uiProvider.getData().Name}}</span></p>
-            <div>
+            <div class="removeBorder">
                     <p editable-text="uiProvider.getData().Adresa"> <label>Adresa: </label><span class="qwertyColleftSub">{{uiProvider.getData().Adresa || 'Nije uneto'}} <i class="fa fa-pencil"></i></span></p>
             </div>
             <form>
@@ -25,11 +25,11 @@
                    <span class="qwertyColleftSub"> <input type="text" ng-model="uiProvider.getData().BrojDanaOdmora"  ng-change="uiProvider.calculateDates()"></span>
                 </label>
             </form>
-            <!--<form>-->
-                <!--<label>Datum uzimanja odmora:-->
-                    <!--<span class="qwertyColleftSub"><input type="date" name="DatumUzimanjaOdmora" value="{{uiProvider.getData().DatumUzimanjaOdmora}}" class="text1" ng-model="uiProvider.getData().DatumUzimanjaOdmora"></span>-->
-                <!--</label>-->
-            <!--</form>-->
+
+            <div class="removeBorder">
+                <p editable-text="uiProvider.getData().Company"> <label>Firma: </label><span class="qwertyColleftSub">{{uiProvider.getData().Company || 'Nije uneto'}} <i class="fa fa-pencil"></i></span></p>
+            </div>
+
         </div>
 
 

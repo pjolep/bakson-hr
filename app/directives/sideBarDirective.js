@@ -21,7 +21,23 @@ angular.module('directives').directive('list', function(){
         },
         templateUrl : 'templates/sideBarListDirective.html',
         link : function(scope, el, attr){
+            var input = el.find('input')[0],
+                submit = el.find('input')[1];
+            submit.addEventListener("click", function() {
+                if(input.value.length > 2){
+                    input.value = "";
+                }
+            });
+            $(input).keypress(function(event) {
+                if ( event.which == 13 ) {
+                    event.preventDefault();
+                    if(input.value.length > 2){
+                        input.value = "";
+                    }
+                }
+            });
 
+            var li = el.find('list');
         }
 
     }

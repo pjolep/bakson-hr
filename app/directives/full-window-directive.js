@@ -5,7 +5,7 @@ angular.module('directives').directive('forceWindow', function($window) {
             restrict:'A',
                 $scope.initializeWindowSize = function() {
                     $scope.windowHeight = $window.innerHeight;
-                    $scope.commentsHeight = $window.innerHeight - 570 + 'px';
+                    $scope.commentsHeight = $window.innerHeight - 555 + 'px';
                 };
             $scope.initializeWindowSize();
             return angular.element($window).bind('resize', function() {
