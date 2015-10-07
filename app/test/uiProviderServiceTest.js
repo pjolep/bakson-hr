@@ -115,10 +115,17 @@ fdescribe("Testing Service", function() {
     it('Should increment by one if typeOfVacation is Slobodni Radni Dan', inject(function(uiProvider){
         var counter = 0;
         var typeOfVacation = uiProvider.typeOfVacation('SlobodniRadniDan');
+        expect(counter).toEqual(0);
         if(typeOfVacation === 'SlobodniRadniDan'){
             counter++;
         }
         expect(counter).toEqual(1);
+    }));
+
+    it('Should count daysTaken', inject(function(uiProvider){
+        var days = uiProvider.getDates('10/10/2015', '15/10/2015');
+        var daysTakenCalculation = uiProvider.countWorkingDays(days);
+        expect(daysTakenCalculation).toEqual(4);
     }));
 
 });
