@@ -4,11 +4,11 @@ fdescribe("Testing Service", function() {
     beforeEach(module('services'));
 
     it("Array for tabs should exist", inject(function(uiProvider){
-        expect(uiProvider.tabs).toBeDefined();
+        expect(uiProvider.employees).toBeDefined();
     }));
 
     it("Data menu should be defined", inject(function(uiProvider){
-        expect(uiProvider.dataMenu).toBeDefined();
+        expect(uiProvider.toggleTab).toBeDefined();
     }));
 
     it("Remove tab method should be defined", inject(function(uiProvider){
@@ -16,15 +16,15 @@ fdescribe("Testing Service", function() {
     }));
 
     it("Should show the bellow tabs", inject(function(uiProvider){
-        expect(uiProvider.getData).toBeDefined();
+        expect(uiProvider.getSelectedEmployee).toBeDefined();
     }));
 
-    it('Should check if saveData method is defined', inject(function(uiProvider){
-        expect(uiProvider.saveData).toBeDefined();
+    it('Should check if saveEmployee method is defined', inject(function(uiProvider){
+        expect(uiProvider.saveEmployee).toBeDefined();
     }));
 
     it("Methods should be defined", inject(function (uiProvider) {
-        expect(uiProvider.addTab).toBeDefined();
+        expect(uiProvider.showEmployee).toBeDefined();
         expect(uiProvider.toggle).toBeDefined();
     }));
 
@@ -33,7 +33,7 @@ fdescribe("Testing Service", function() {
     }));
 
     it("Data for menu(methods) should be defined", inject(function(uiProvider) {
-        expect(uiProvider.getData).toBeDefined();
+        expect(uiProvider.getSelectedEmployee).toBeDefined();
     }));
 
     it("Test if json data exist", inject(function($http){
@@ -46,10 +46,10 @@ fdescribe("Testing Service", function() {
     }));
 
     it('Should test if tab is selected', inject(function(uiProvider) {
-        uiProvider.tabs.push('Tab1');
+        uiProvider.employees.push('Tab1');
         uiProvider.selected = 'Tab1';
         var tabSelected = false;
-        if(uiProvider.selected === uiProvider.tabs[0]){
+        if(uiProvider.selected === uiProvider.employees[0]){
             tabSelected = true;
             expect(tabSelected).toEqual(true);
         }

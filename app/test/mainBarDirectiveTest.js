@@ -8,7 +8,7 @@ describe('Testing mainBar', function() {
     beforeEach(inject(function($compile, $rootScope, $httpBackend) {
         compile = $compile;
         scope = $rootScope.$new();
-        $httpBackend.whenGET('templates/mainBarDirective.html').respond(200, '');
+        $httpBackend.whenGET('view/templates/mainBarDirective.html').respond(200, '');
     }));
 
     function compileTemplate(){
@@ -16,7 +16,7 @@ describe('Testing mainBar', function() {
         element = angular.element('<main-bar></main-bar>');
         compiledElement = compile(element)(scope);
 
-        section = $('<section class="qwerty" ng-if="uiProvider.getData()"></section>');
+        section = $('<section class="qwerty" ng-if="uiProvider.getSelectedEmployee()"></section>');
         divLeft = $('<div class="qwertyColleft"></div>');
         divRight = $('<div class="qwertyColright"></div>');
         removeForm = $('<form method="post" action="/remove" class="save"></form>');

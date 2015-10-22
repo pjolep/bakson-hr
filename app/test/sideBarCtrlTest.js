@@ -33,7 +33,7 @@ describe('sideBar', function() {
 
     it('Should add new object/data', inject(function(uiProvider) {
         httpBackend.when("POST", "./data.json").respond([{}, {}, {}]);
-        var userData =  {
+        var employeeData =  {
             "Name" : 1234,
             "Adresa" : "1234",
             "DatumRodjenja" : "1234",
@@ -47,8 +47,8 @@ describe('sideBar', function() {
             "Komentar2" : "1234"
         };
 
-        uiProvider.data = [];
-        uiProvider.data.push(uiProvider.data);
+        uiProvider.employees = [];
+        uiProvider.employees.push(employeeData);
         expect(uiProvide.data.length).toBeGreaterThan(0);
 
     }));

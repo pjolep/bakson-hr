@@ -1,7 +1,7 @@
 
 describe('sideBar directive', function(){
 
-    var scope, template, ul, li, form, addNew, section, h3;
+    var scope, template, ul, li, form, addNewTab, section, h3;
 
     beforeEach(module('directives'));
 
@@ -13,11 +13,11 @@ describe('sideBar directive', function(){
 
         section = '<section class="sideBar"></section>';
 
-        addNew = $('<form></form>').append($('<label class="nameClass"></label>').append($(
-            '<input type="text" placeholder="Ime i prezime" ng-keydown="$event.which === 13 && addNew()">'
+        addNewTab = $('<form></form>').append($('<label class="nameClass"></label>').append($(
+            '<input type="text" placeholder="Ime i prezime" ng-keydown="$event.which === 13 && addNewTab()">'
         )));
-        addNew.append($('<label class="addName"></label>').append($(
-            '<input type="button" value="Dodaj" ng-click="addNew()">'
+        addNewTab.append($('<label class="addName"></label>').append($(
+            '<input type="button" value="Dodaj" ng-click="addNewTab()">'
         )));
 
         form = $('<form></form>').append($('<label class="addName"></label>').append($(
@@ -26,7 +26,7 @@ describe('sideBar directive', function(){
 
         ul = $('<ul></ul>');
         li = $('<li>1</li>');
-        template = $('<section class="sideBar"></section>').append(addNew).append(form);
+        template = $('<section class="sideBar"></section>').append(addNewTab).append(form);
         $(template).append(ul);
         $(template).append(li);
 
@@ -56,20 +56,20 @@ describe('sideBar directive', function(){
             expect($(template).find('li').length).toBeGreaterThan(0)
         });
 
-        it('Should have addNew input Ime i prezime', function() {
+        it('Should have addNewTab input Ime i prezime', function() {
             var label = $(template).find('label')[0];
             expect($(label).children().length).toBeGreaterThan(0);
             expect($(label).children().find('input')).toBeDefined();
         });
 
-        it('Should have addNew input type submit', function() {
+        it('Should have addNewTab input type submit', function() {
             var label = $(template).find('label')[1];
             expect($(label).children().length).toBeGreaterThan(0);
             expect($(label).children().find('input')).toBeDefined();
         });
 
         it('Should add new name(li to ul), if input type submit is clicked', function() {
-            var label = $(addNew).find('label')[1],
+            var label = $(addNewTab).find('label')[1],
                 input = $(label).find('input').val(Math.floor(Math.random() * 1000));
             if(input.click()){
                 $(template).find('ul').append('<li>' + input.val() +'</li>');

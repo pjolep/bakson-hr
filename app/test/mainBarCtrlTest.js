@@ -41,12 +41,12 @@ describe('mainBarCtrl Test', function(){
         }
     });
 
-    it('Should have saveData method Defined', function() {
-        expect(uiProvide.saveData).toBeDefined();
+    it('Should have saveEmployee method Defined', function() {
+        expect(uiProvide.saveEmployee).toBeDefined();
     });
 
-    it('Should have removeName method Defined', function() {
-        expect(uiProvide.removeName).toBeDefined();
+    it('Should have removeEmployee method Defined', function() {
+        expect(uiProvide.removeEmployee).toBeDefined();
     });
 
 
