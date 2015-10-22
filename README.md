@@ -1,1 +1,1 @@
-Application for managing employees vacation
+Application for managing staff leave
