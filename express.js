@@ -63,7 +63,8 @@ app.set('port', process.env.PORT || config.port);
 var url =
     'mongodb://localhost:27017/Employees'
     || process.env.MONGOLAB_URI
-    || process.env.MONGOHQ_URL;
+    || process.env.MONGOHQ_URL
+    || process.env.OPENSHIFT_NODEJS_PORT;
 
 MongoClient.connect(url, function(err, db) {
 
