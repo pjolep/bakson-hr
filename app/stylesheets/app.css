@@ -24,7 +24,7 @@ main:after, .qwerty:after {
   display: table;
   clear: both; }
 
-.save label input, .save label button, .centerButtons button {
+.configurationChildren button, .save label input, .save label button, .saveRowColumn button, .removeRowColumn button, .centerButtons button {
   text-align: center;
   display: inline-block;
   padding: 5px;
@@ -36,7 +36,7 @@ main:after, .qwerty:after {
   font-weight: 100;
   border: 1px solid transparent;
   margin: 2px; }
-  .save label input:hover, .save label button:hover, .centerButtons button:hover {
+  .configurationChildren button:hover, .save label input:hover, .save label button:hover, .saveRowColumn button:hover, .removeRowColumn button:hover, .centerButtons button:hover {
     background-color: #23A76D;
     box-shadow: 1px 1px 0px black; }
 
@@ -48,22 +48,22 @@ main:after, .qwerty:after {
   .sideBar input:focus, .qwertyColleft input:focus, .qwertyColright form textarea:focus, .nameClass input:focus {
     border: 1px solid #3D7663; }
 
-.datesAndcomments .dates input, .datesAndcomments .typeOfVacation label select, .datesAndcomments .comments input, .datesAndcomments input {
+.datesAndcomments .dates input, .datesAndcomments .typeOfVacation label select, .datesAndcomments .daysTaken label select, .datesAndcomments .comments input, .datesAndcomments input {
   background-color: #393A3C;
   border: 1px solid #3D7663;
   border-radius: 0;
   color: white;
   padding: 10px; }
 
-.sideBar input, .qwerty input, .qwerty textarea, .save label button, .datesAndcomments .addDates input, .datesAndcomments .dates input, .datesAndcomments .typeOfVacation label select, .datesAndcomments .comments input, .datesAndcomments input, .datesAndcomments input:disabled, .comments input, .numOfDays input, .centerButtons button {
+.sideBar input, .qwerty input, .qwerty textarea, .save label button, .datesAndcomments .addDates input, .datesAndcomments .dates input, .datesAndcomments .typeOfVacation label select, .datesAndcomments .daysTaken label select, .datesAndcomments .comments input, .datesAndcomments input, .datesAndcomments input:disabled, .saveRowColumn button, .removeRowColumn button, .comments input, .numOfDays input, .centerButtons button {
   transition: 0.2s ease-in-out; }
-  .sideBar input:focus, .qwerty input:focus, .qwerty textarea:focus, .save label button:focus, .datesAndcomments .typeOfVacation label select:focus, .datesAndcomments input:focus, .comments input:focus, .numOfDays input:focus, .centerButtons button:focus {
+  .sideBar input:focus, .qwerty input:focus, .qwerty textarea:focus, .save label button:focus, .datesAndcomments .typeOfVacation label select:focus, .datesAndcomments .daysTaken label select:focus, .datesAndcomments input:focus, .saveRowColumn button:focus, .removeRowColumn button:focus, .comments input:focus, .numOfDays input:focus, .centerButtons button:focus {
     border-color: #3D7663;
     box-shadow: 0 1px 1px #3D7663 inset, 0 0 8px #3D7663;
     outline: 0 none;
     transition: 0.2s ease-in-out; }
 
-.activeTab:before {
+.activeConfig:before, .activeTab:before {
   content: '';
   width: 0;
   height: 0;
@@ -127,11 +127,11 @@ main:after, .qwerty:after {
   font-style: normal;
   src: url("../assets/fonts/TMSans-Italic.eot");
   src: url("../assets/fonts/TMSans-Italic.eot?#iefix") format("embedded-opentype"), url("../assets/fonts/TMSans-Italic.woff") format("woff"), url("../assets/fonts/TMSans-Italic.ttf") format("truetype"), url("../assets/fonts/TMSans-Italic.svg#TMSans-Ialic") format("svg"); }
-.sideBar input::-webkit-input-placeholder, .sideBar ul li, .cardTab, .dataTabs .informationTabs, .qwertyColleft span, .datesAndcomments, .datesAndcomments .dates input, .datesAndcomments .typeOfVacation label select, .datesAndcomments .comments input, .datesAndcomments input, .rightContentHelp, label, .sideBar h3, .datesAndcomments .addDates input[type="submit"] {
+.sideBar input::-webkit-input-placeholder, .sideBar ul li, .configuration, .cardTab, .dataTabs .informationTabs, .qwertyColleft span, .datesAndcomments, .datesAndcomments .dates input, .datesAndcomments .typeOfVacation label select, .datesAndcomments .daysTaken label select, .datesAndcomments .comments input, .datesAndcomments input, .saveRowColumn button, .removeRowColumn button, .rightContentHelp, label, .sideBar h3, .datesAndcomments .addDates input[type="submit"] {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
-.sideBar input::-webkit-input-placeholder, .sideBar ul li, .cardTab, .dataTabs .informationTabs, .qwertyColleft span, .datesAndcomments, .datesAndcomments .dates input, .datesAndcomments .typeOfVacation label select, .datesAndcomments .comments input, .datesAndcomments input, .rightContentHelp {
+.sideBar input::-webkit-input-placeholder, .sideBar ul li, .configuration, .cardTab, .dataTabs .informationTabs, .qwertyColleft span, .datesAndcomments, .datesAndcomments .dates input, .datesAndcomments .typeOfVacation label select, .datesAndcomments .daysTaken label select, .datesAndcomments .comments input, .datesAndcomments input, .saveRowColumn button, .removeRowColumn button, .rightContentHelp {
   font-family: 'Interstate-Regular', 'TMSans-Bold', 'Helvetica', 'Arial'; }
 
 label, .sideBar h3, .datesAndcomments .addDates input[type="submit"] {
@@ -289,10 +289,24 @@ fieldset {
   color: white;
   transition: 0.2s ease-in-out; }
 
-.text1 {
-  width: 100%;
-  border-radius: 8px;
-  padding: 4px; }
+.configuration {
+  color: white;
+  padding: 21px 30px 21px 15px;
+  margin: 0;
+  font-size: 16px;
+  float: right;
+  background-color: #2C473E;
+  border-top: 7px solid #b50000;
+  position: relative; }
+
+.activeConfig:before {
+  position: absolute;
+  border-top: 5px solid #ff3636; }
+
+.configurationChildren {
+  text-align: center; }
+  .configurationChildren button {
+    margin-top: 70px; }
 
 .cardTab, .dataTabs .informationTabs {
   background-color: #2E2F31;
@@ -402,13 +416,13 @@ fieldset {
     transition: 0.2s ease-in-out;
     border: 1px solid black; }
 
-.saveButton {
+.saveButton, .removeRowColumn button {
   background-color: #b50000 !important;
   transition: 0.5s ease-in-out !important; }
-  .saveButton:hover {
+  .saveButton:hover, .removeRowColumn button:hover {
     transition: 0.5s ease-in-out !important;
     background-color: #C64E20 !important; }
-  .saveButton:focus {
+  .saveButton:focus, .removeRowColumn button:focus {
     border-color: #C64E20 !important;
     box-shadow: 0 1px 1px #C64E20 inset, 0 0 8px #C64E20 !important;
     outline: 0 none !important;
@@ -423,12 +437,14 @@ fieldset {
 .datesAndcomments {
   color: white; }
   .datesAndcomments .addDates {
+    border-bottom: 1px solid #4a4a4a;
     background-color: #2E2F31;
     padding-left: 15px;
     border-top: 1px solid #4a4a4a;
     padding-top: 15px;
     padding-bottom: 15px;
-    text-align: center; }
+    text-align: center;
+    margin-bottom: 30px; }
     .datesAndcomments .addDates input {
       width: 30%; }
     .datesAndcomments .addDates input[type="submit"] {
@@ -442,11 +458,12 @@ fieldset {
         background-color: #1a7d51;
         transition: 0.2s ease-in-out; }
   .datesAndcomments .dates {
-    width: 25%;
+    width: 20%;
     background-color: #2E2F31;
     padding: 10px;
-    border-top: 1px solid #4a4a4a;
-    border-right: 1px solid #4a4a4a; }
+    border-right: 1px solid #4a4a4a;
+    margin: 0;
+    border-bottom: 1px solid #4a4a4a; }
     .datesAndcomments .dates::-webkit-scrollbar {
       background-color: #3a3c3e; }
     .datesAndcomments .dates::-webkit-scrollbar-corner {
@@ -455,40 +472,36 @@ fieldset {
       background-color: #3d3e41;
       border: 1px solid black; }
     .datesAndcomments .dates input {
-      display: block;
-      margin-bottom: 5px; }
-  .datesAndcomments .typeOfVacation {
-    width: 25%;
+      margin-bottom: 20px !important;
+      display: inline-block; }
+  .datesAndcomments .typeOfVacation, .datesAndcomments .daysTaken {
+    width: 20%;
     background-color: #2E2F31;
     padding: 10px;
-    border-top: 1px solid #4a4a4a;
-    float: left; }
-    .datesAndcomments .typeOfVacation label select {
+    float: left;
+    border-bottom: 1px solid #4a4a4a;
+    border-right: 1px solid #4a4a4a; }
+    .datesAndcomments .typeOfVacation label select, .datesAndcomments .daysTaken label select {
       height: 41px;
       vertical-align: top;
       box-sizing: border-box;
       font-weight: 100;
       border-radius: 0;
-      margin-bottom: 5px; }
+      margin-bottom: 20px !important; }
+  .datesAndcomments .commentsWrap {
+    border-bottom: 1px solid #4a4a4a; }
   .datesAndcomments .daysTaken {
-    width: 5%;
-    text-align: center; }
-  .datesAndcomments .daysTaken {
-    width: 9%;
-    border-left: 1px solid #4a4a4a;
-    border-top: 1px solid #4a4a4a;
-    padding: 10px; }
+    width: 9% !important; }
     .datesAndcomments .daysTaken p {
-      padding: 4px;
       text-align: center; }
   .datesAndcomments .comments {
-    width: 17%;
+    width: 20%;
     background-color: #2E2F31;
     padding: 10px;
     float: right;
     border-left: 1px solid #4a4a4a;
     border-right: 1px solid #4a4a4a;
-    border-top: 1px solid #4a4a4a; }
+    border-bottom: 1px solid #4a4a4a; }
     .datesAndcomments .comments::-webkit-scrollbar {
       background-color: #3a3c3e; }
     .datesAndcomments .comments::-webkit-scrollbar-corner {
@@ -498,15 +511,17 @@ fieldset {
       border: 1px solid black; }
     .datesAndcomments .comments input {
       display: block;
-      margin-bottom: 5px; }
+      margin-bottom: 20px; }
   .datesAndcomments .dateTo {
-    width: 25%;
+    width: 20%;
     background-color: #2E2F31;
     padding: 10px;
-    border-top: 1px solid #4a4a4a;
     float: left;
-    border-right: 1px solid #4a4a4a; }
+    border-right: 1px solid #4a4a4a;
+    border-bottom: 1px solid #4a4a4a; }
   .datesAndcomments input {
+    margin: 0 !important;
+    margin-top: 10px;
     width: 100%;
     font-weight: 100;
     margin-bottom: 5px; }
@@ -516,19 +531,58 @@ fieldset {
       color: #bcbcbc;
       opacity: 0.2; }
 
+.saveRowColumn {
+  background-color: #2E2F31;
+  padding: 10px;
+  float: left;
+  border-bottom: 1px solid #4a4a4a;
+  border-right: 1px solid #4a4a4a;
+  width: 10.5%; }
+  .saveRowColumn span {
+    padding-top: 10px; }
+  .saveRowColumn button {
+    padding: 10px;
+    display: block;
+    width: 100%;
+    position: relative;
+    top: -4px; }
+    .saveRowColumn button:hover {
+      transition: 0.2s ease-in-out; }
+
+.removeRowColumn {
+  background-color: #2E2F31;
+  padding: 10px;
+  float: left;
+  border-bottom: 1px solid #4a4a4a;
+  border-right: 1px solid #4a4a4a;
+  width: 10%; }
+  .removeRowColumn span {
+    padding-top: 10px; }
+  .removeRowColumn button {
+    position: relative;
+    top: -4px;
+    padding: 10px;
+    display: block;
+    width: 100%; }
+    .removeRowColumn button:hover {
+      transition: 0.2s ease-in-out; }
+
 .dataTabs .informationTabs {
   border-top: 1px solid #4a4a4a;
   background-color: #2C473E;
-  float: left !important; }
+  float: left !important;
+  border-bottom: 1px solid #4a4a4a; }
 
 .inputSuccess {
   border-color: white; }
 
 .commentsWrap {
   display: flex;
-  align-content: stretch; }
+  align-content: stretch;
+  margin-top: -30px; }
 
 .comments input {
+  margin-top: 10px;
   width: 100%; }
 
 .numOfDays {
@@ -538,7 +592,7 @@ fieldset {
     padding: 5px;
     margin-top: 5px; }
 
-.datesAndcomments .typeOfVacation select {
+.datesAndcomments .typeOfVacation select, .datesAndcomments .daysTaken select {
   width: 100%; }
 
 .activeSideTab {

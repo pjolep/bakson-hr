@@ -209,12 +209,34 @@ fieldset {
   transition: 0.2s ease-in-out;
 }
 
-.text1{
-  width: 100%;
-  border-radius: 8px;
-  padding: 4px;
+
+.configuration{
+  color: white;
+  padding: 21px 30px 21px 15px;
+  margin: 0;
+  font-size: 16px;
+  @extend %ticketmasterFontRegular;
+  float: right;
+  background-color: #2C473E;
+  border-top: 7px solid #b50000;
+  position: relative;
 }
 
+.activeConfig{
+  &:before{
+    position: absolute;
+    @extend %arrow;
+    border-top: 5px solid lighten(#b50000, 25%);
+  }
+}
+
+.configurationChildren{
+  text-align: center;
+  button{
+    @extend %primaryButtons;
+    margin-top: 70px;
+  }
+}
 
 .cardTab {
   background-color: $tint-mainBg;
@@ -409,12 +431,14 @@ fieldset {
 .datesAndcomments{
   color: white;
   .addDates{
+    border-bottom: 1px solid $tint-borderColor;
     background-color: $tint-mainBg;
     padding-left: 15px;
     border-top: 1px solid $tint-borderColor;
     padding-top: 15px;
     padding-bottom: 15px;
     text-align: center;
+    margin-bottom: 30px;
     input{
       width: 30%;
       @extend %focus;
@@ -437,11 +461,12 @@ fieldset {
 
   @extend %ticketmasterFontRegular;
   .dates{
-    width: 25%;
+    width: 20%;
     background-color: $tint-mainBg;
     padding: 10px;
-    border-top: 1px solid $tint-borderColor;
     border-right: 1px solid $tint-borderColor;
+    margin: 0;
+    border-bottom: 1px solid $tint-borderColor;
     &::-webkit-scrollbar{
       background-color: lighten($tint-mainBg, 5);
     }
@@ -453,21 +478,21 @@ fieldset {
       border: 1px solid black;
     }
     input{
-      display: block;
-      margin-bottom: 5px;
+      margin-bottom: 20px !important;
       @extend %ticketmasterFontRegular;
       @extend %secondaryInputs;
       @extend %focus;
+      display: inline-block;
     }
   }
 
   .typeOfVacation{
-    width: 25%;
+    width: 20%;
     background-color: $tint-mainBg;
     padding: 10px;
-    border-top: 1px solid $tint-borderColor;
     float: left;
-
+    border-bottom: 1px solid $tint-borderColor;
+    border-right: 1px solid $tint-borderColor;
     label{
       select{
         height: 41px;
@@ -475,7 +500,7 @@ fieldset {
         box-sizing: border-box;
         font-weight: 100;
         border-radius: 0;
-        margin-bottom: 5px;
+        margin-bottom: 20px !important;
         @extend %ticketmasterFontRegular;
         @extend %secondaryInputs;
         @extend %focus;
@@ -483,31 +508,40 @@ fieldset {
     }
   }
 
-  .daysTaken{
-    width: 5%;
-    text-align: center;
-
+  .commentsWrap{
+    border-bottom: 1px solid $tint-borderColor;
   }
 
   .daysTaken{
-    width: 9%;
-    border-left: 1px solid $tint-borderColor;
-    border-top: 1px solid $tint-borderColor;
-    padding: 10px;
+    @extend .typeOfVacation;
+    width: 9% !important;
     p{
-      padding: 4px;
       text-align: center;
     }
+    //border: none;
+    //span{
+    //  padding-left: 5px;
+    //}
+    //width: 9%;
+    //padding-top: 10px;
+    //margin-bottom: 10px;
+    //p{
+    //  margin-top: -10px;
+    //  text-align: center;
+    //  position: relative;
+    //  top: 20px;
+    //  border: none;
+    //}
   }
 
   .comments{
-    width: 17%;
+    width: 20%;
     background-color: $tint-mainBg;
     padding: 10px;
     float: right;
     border-left: 1px solid $tint-borderColor;
     border-right: 1px solid $tint-borderColor;
-    border-top: 1px solid $tint-borderColor;
+    border-bottom: 1px solid $tint-borderColor;
     &::-webkit-scrollbar{
       background-color: lighten($tint-mainBg, 5);
     }
@@ -520,7 +554,7 @@ fieldset {
     }
     input{
       display: block;
-      margin-bottom: 5px;
+      margin-bottom: 20px;
       @extend %secondaryInputs;
       @extend %focus;
       @extend %ticketmasterFontRegular;
@@ -528,15 +562,17 @@ fieldset {
   }
 
   .dateTo{
-    width: 25%;
+    width: 20%;
     background-color: $tint-mainBg;
     padding: 10px;
-    border-top: 1px solid $tint-borderColor;
     float: left;
     border-right: 1px solid $tint-borderColor;
+    border-bottom: 1px solid $tint-borderColor;
   }
 
   input{
+    margin: 0 !important;
+    margin-top: 10px;
     width: 100%;
     @extend %secondaryInputs;
     @extend %focus;
@@ -553,12 +589,65 @@ fieldset {
   }
 }
 
+.saveRowColumn{
+  background-color: $tint-mainBg;
+  padding: 10px;
+  float: left;
+  border-bottom: 1px solid $tint-borderColor;
+  border-right: 1px solid $tint-borderColor;
+  width: 10.5%;
+  span{
+    padding-top: 10px;
+  }
+  button{
+    padding: 10px;
+    display: block;
+    @extend %primaryButtons;
+    @extend %focus;
+    @extend %ticketmasterFontRegular;
+    width: 100%;
+    position: relative;
+    top: -4px;
+    &:hover{
+      transition: 0.2s ease-in-out;
+    }
+  }
+}
+
+.removeRowColumn{
+  background-color: $tint-mainBg;
+  padding: 10px;
+  float: left;
+  border-bottom: 1px solid $tint-borderColor;
+  border-right: 1px solid $tint-borderColor;
+  width: 10%;
+  span{
+    padding-top: 10px;
+  }
+  button{
+    position: relative;
+    top: -4px;
+    padding: 10px;
+    display: block;
+    @extend %primaryButtons;
+    @extend %focus;
+    @extend %ticketmasterFontRegular;
+    @extend .saveButton;
+    width: 100%;
+    &:hover{
+      transition: 0.2s ease-in-out;
+    }
+  }
+}
+
+
 .dataTabs{
   .informationTabs{
     @extend .cardTab;
     border-top: 1px solid $tint-borderColor;
     background-color: #2C473E;
     float: left !important;
+    border-bottom: 1px solid $tint-borderColor;
   }
 }
 
@@ -569,11 +658,13 @@ fieldset {
 .commentsWrap{
   display: flex;
   align-content: stretch;
+  margin-top: -30px;
 }
 
 .comments{
 
   input{
+    margin-top: 10px;
     width: 100%;
     @extend %focus;
   }
@@ -648,6 +739,15 @@ fieldset {
     font-size: 1em;
   }
 }
+
+
+
+
+
+
+
+
+
 
 
 .editable-wrap {
