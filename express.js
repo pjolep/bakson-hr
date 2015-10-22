@@ -58,7 +58,7 @@ app.get('/', auth, function(req, res) {
 app.use(express.static(dir));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.set('port', process.env.PORT || config.port);
+app.set('port', process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || config.port);
 
 var url =
     'mongodb://localhost:27017/Employees'
