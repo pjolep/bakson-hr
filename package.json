@@ -23,7 +23,8 @@
     "protractor": "^2.1.0"
   },
   "engines": {
-    "node": "0.10.31"
+    "node": ">= 0.10",
+    "npm": ">= 1.4"
   },
   "scripts": {
     "prestart": "npm install",
