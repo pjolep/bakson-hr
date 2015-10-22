@@ -22,6 +22,7 @@
     "angular-loader": "~1.4.0",
     "angular-mocks": "~1.4.0",
     "html5-boilerplate": "~5.2.0",
+    "underscore" : "latest",
     "moment": "latest"
   }
 }
