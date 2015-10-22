@@ -62,7 +62,7 @@ app.set('port', process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || config.
 
 var url =
     'mongodb://localhost:27017/Employees'
-    || process.env.MONGOLAB_URI
+    || process.env.OPENSHIFT_MONGODB_DB_URL
     || process.env.MONGOHQ_URL
     || process.env.OPENSHIFT_NODEJS_PORT;
 
