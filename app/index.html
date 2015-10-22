@@ -2,7 +2,8 @@
 <!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+<!--[if gt IE 8]><!--> 
+<html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,15 +18,15 @@
   <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.min.css">
   <!--<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">-->
 </head>
-<body ng-cloak="">
+<body ng-cloak="" >
 
 <!--ng-class="{'active':sidebarOpen}"-->
 <main ng-class="{'active':sidebarOpen}">
     <section ng-include src="'view/sideBar.html'" class="sideBar" ng-controller="sideBar"></section>
-    <toggle ng-click="sidebarOpen=!sidebarOpen"></toggle>
+    <toggle-side-bar ng-click="sidebarOpen=!sidebarOpen"></toggle-side-bar>
     <section ng-include src="'view/rightContent.html'" class="rightContent" ng-controller="mainView"></section>
 </main>
-
+    
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -35,12 +36,18 @@
   <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
   <script src="bower_components/moment/moment.js"></script>
   <script src="bower_components/momentjs-business/momentjs-business.js"></script>
+  <script src="bower_components/underscore/underscore-min.js"></script>
   <script src="directives/_directives.js"></script>
-  <script src="directives/sideBarDirective.js"></script>
-  <script src="directives/mainBarDirective.js"></script>
-  <script src="directives/dataTabsDirective.js"></script>
-  <script src="directives/sideBarToggleDirective.js"></script>
-  <script src="directives/full-window-directive.js"></script>
+  <script src="directives/sideBar.js"></script>
+  <script src="directives/toggleSideBar.js"></script>
+  <script src="directives/employee.js"></script>
+  <script src="directives/employeeData.js"></script>
+  <script src="directives/employeesList.js"></script>
+  <script src="directives/mainBar.js"></script>
+  <script src="directives/absenteeRow.js"></script>
+  <script src="directives/absentees.js"></script>
+  <script src="directives/fullWindow.js"></script>
+  <script src="directives/appContainer.js"></script>
   <script src="bower_components/angular-filter/dist/angular-filter.js"></script>
   <script src="services/_services.js"></script>
   <script src="services/uiProvider.js"></script>
@@ -50,6 +57,6 @@
   <script src="components/version/version.js"></script>
   <script src="components/version/version-directive.js"></script>
   <script src="components/version/interpolate-filter.js"></script>
-
+    
 </body>
 </html>
