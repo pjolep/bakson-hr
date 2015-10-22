@@ -1,0 +1,77 @@
+<div class="commentsWrap clearfix" ng-style="{minHeight:commentsHeight}" ng-controller="mainView">
+
+
+        <form class="removeRowColumn">
+            <span ng-if="index==0">Izbrisati:</span>
+            <label>
+                <button ng-click="deleteRow()" class="removeRow"><i class="fa fa-times"></i></button>
+            </label>
+        </form>
+
+
+        <form class="dates">
+            <span ng-if="index==0">Datum od:</span>
+            <label>
+                    <input type="text" value="{{row.date}}"
+                           ng-model="row.date"
+                           ng-class={'active':uiProvider.inputError}
+                           ng-change="uiProvider.calculateDates(); uiProvider.calculateSlobodneDane();"
+                           ng-model-options="{debounce: 700}"
+                           required>
+            </label>
+        </form>
+
+        <form class="dateTo">
+            <span ng-if="index==0">Datum do:</span>
+            <label>
+                <input type="text"
+                       value="{{row.dateTo}}"
+                       ng-model="row.dateTo"
+                       ng-class={'active':uiProvider.inputError}
+                       ng-change="uiProvider.calculateDates();"
+                       required
+                       ng-disabled="row.typeOfVacation != 'Odmor'"
+                       ng-model-options="{debounce: 700}"
+                        >
+            </label>
+        </form>
+
+
+        <form class="typeOfVacation">
+            <span ng-if="index==0">Tip odmora:</span>
+            <label>
+                <select ng-model="row.typeOfVacation" ng-change="uiProvider.calculateDates()"
+                        class="select">
+                    <option value="Odmor">Odmor</option>
+                    <option value="Bolovanje">Bolovanje</option>
+                    <option value="SlobodniRadniDan">Slobodni dan</option>
+                    <option value="NagradniDan">Nagradni dan</option>
+                </select>
+            </label>
+        </form>
+
+        <div class="daysTaken">
+            <span ng-if="index==0">Uzeto dana:</span>
+            <p>{{row.daysTaken}}</p>
+        </div>
+
+        <form class="comments">
+            <span ng-if="index==0">Komentar:</span>
+            <form>
+                <label>
+                    <input type="text" value="{{row.comment}}"
+                           ng-model="row.comment"
+                           ng-class={'active':uiProvider.inputError}
+                           required>
+                </label>
+            </form>
+        </form>
+
+        <form class="saveRowColumn">
+            <span ng-if="index==0">Sačuvati:</span>
+            <label>
+                <button ng-click="uiProvider.saveRow()"><i class="fa fa-check"></i></button>
+            </label>
+        </form>
+
+</div>

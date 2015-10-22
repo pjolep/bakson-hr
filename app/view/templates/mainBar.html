@@ -1,0 +1,15 @@
+<header class="headerTabs">
+    <div class="cardTab" ng-repeat="i in uiProvider.employeesTabs" ng-click="toggleTab()" ng-class="{'activeTab': uiProvider.selectedEmployee === uiProvider.employeesTabs[$index]._id}">
+        {{i.Name}}
+        <span ng-click="uiProvider.removeEmployeeTab($index)" class="closeTab"><i class="fa fa-times"></i></span>
+    </div>
+</header>
+
+<section class="configurationChildren" ng-if="uiProvider.showConfig">
+    <button ng-click="uiProvider.showListOfAllEmployees()">Prikazi listu svih radnika</button>
+</section>
+
+
+<employee></employee>
+
+

@@ -1,0 +1,58 @@
+<section class="qwerty" ng-if="uiProvider.getSelectedEmployee()">
+
+        <div class="qwertyColleft">
+            <p><label>Ime: </label><span class="qwertyColleftSub">{{uiProvider.getSelectedEmployee().Name}}</span></p>
+            <div class="removeBorder">
+                    <p editable-text="uiProvider.getSelectedEmployee().Adresa"> <label>Adresa: </label><span class="qwertyColleftSub">{{uiProvider.getSelectedEmployee().Adresa || 'Nije uneto'}} <i class="fa fa-pencil"></i></span></p>
+            </div>
+            <form>
+                <label>Datum rodjenja:
+                    <span class="qwertyColleftSub"><input type="text" name="DatumRodjenja" ng-model="uiProvider.getSelectedEmployee().DatumRodjenja" class="text1" value="{{uiProvider.getSelectedEmployee().DatumRodjenja | date:'dd/MM/yyyy'}}"></span>
+                </label>
+            </form>
+            <!--<p editable-text="uiProvider.getSelectedEmployee().BrojDanaOdmora"><label>Broj dana odmora :</label><span class="qwertyColleftSub"> {{uiProvider.getSelectedEmployee().BrojDanaOdmora || 'Nije uneto'}}<i class="fa fa-pencil"></i></span></p>-->
+            <form class="numOfDays">
+                <label>Broj Dana Odmora:
+                   <span class="qwertyColleftSub"> <input type="text" ng-model="uiProvider.getSelectedEmployee().BrojDanaOdmora"  ng-change="uiProvider.calculateDates()"></span>
+                </label>
+            </form>
+
+            <div class="removeBorder">
+                <p editable-text="uiProvider.getSelectedEmployee().Firma"> <label>Firma: </label><span class="qwertyColleftSub">{{uiProvider.getSelectedEmployee().Firma || 'Nije uneto'}} <i class="fa fa-pencil"></i></span></p>
+            </div>
+
+        </div>
+
+
+    <div class="qwertyColright">
+            <!--<p editable-text="uiProvider.getSelectedEmployee().BrojUzetihRadnihDana"><label>Broj uzetih radnih dana: </label><span class="qwertyColrightSub">{{uiProvider.getSelectedEmployee().BrojUzetihRadnihDana || 'Nije uneto'}}  <i class="fa fa-pencil"></i></span></p>-->
+            <p><label>Broj uzetih radnih dana: </label><span class="qwertyColleftSub">{{uiProvider.getSelectedEmployee().BrojUzetihRadnihDana || '0'}}</span></p>
+            <p><label>Komentar:</label></p>
+            <form>
+                <label>
+                    <textarea name="Text3" cols="20" rows="2" ng-model="uiProvider.getSelectedEmployee().Komentar">
+                        {{uiProvider.getSelectedEmployee().Komentar}}
+                    </textarea>
+                </label>
+            </form>
+        <!--<p editable-text="uiProvider.getSelectedEmployee().OstaloDana"><label>Ostalo dana: </label><span class="qwertyColrightSub"> {{uiProvider.getSelectedEmployee().OstaloDana || 'Nije uneto'}}  <i class="fa fa-pencil"></i></span></p>-->
+            <p><label>Ostalo dana: </label><span class="qwertyColrightSub"> {{Math.floor(uiProvider.getSelectedEmployee().OstaloDana) || '0'}} </span></p>
+    </div>
+
+    <div class="centerButtons">
+
+        <form method="post" action="/removeEmployee" class="save">
+            <!--<input type="button" value="Izbriši zaposlenog" ng-click="removeEmployee()">-->
+                <button class="saveButton" ng-click="removeEmployee()">Izbrisati<i class="fa fa-times"></i></button>
+        </form>
+
+        <form method="post" action="/saveEmployeeData" class="save" >
+                <!--<input type="button" value="Sačuvaj podatke" ng-click="saveEmployee()">-->
+                <button ng-click="uiProvider.saveEmployeeData()">Sačuvati<i class="fa fa-check"></i></button>
+        </form>
+
+    </div>
+
+</section>
+
+<tabs></tabs>

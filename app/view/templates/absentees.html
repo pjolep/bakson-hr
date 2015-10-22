@@ -1,0 +1,25 @@
+<div class="dataTabs">
+
+
+    <div class="informationTabs" ng-if="uiProvider.getSelectedEmployee()">
+        Nedolasci na posao
+    </div>
+
+</div>
+
+<div class="clear"></div>
+<!--ng-click="uiProvider.informationTabOpen=!uiProvider.informationTabOpen"-->
+
+<section class="datesAndcomments" ng-if="uiProvider.getSelectedEmployee()"  ng-class={'active':uiProvider.informationTabOpen} force-window>
+
+    <div class="addDates">
+        <form>
+            <label>
+                <input type="submit" value="Dodaj tip i datum odmora" ng-click="uiProvider.addEmployeeAbsenteeData()" required>
+            </label>
+        </form>
+    </div>
+
+    <!--<absentee-row first="1"></absentee-row>-->
+    <absentee-row ng-repeat="i in uiProvider.getEmployee().Absentee" row="i" index="{{$index}}" last="{{uiProvider.getEmployee().Absentee.length - 1}}"></absentee-row>
+</section>
