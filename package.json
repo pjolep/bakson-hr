@@ -54,5 +54,6 @@
     "underscore" : "latest",
     "path" : "latest",
     "http-server": "^0.6.1"
+    "postinstall": "export HOME=/var/lib/openshift/[instance-id]/app-root/runtime/repo; ./node_modules/bower/bin/bower install"
   }
 }
