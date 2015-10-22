@@ -1,4 +1,4 @@
-angular.module("services").factory("uiProvider", ['$http', function ($http) {
+angular.module("services").factory("uiProvider", ['$http', function ($http, $resource) {
 
     function _getDates(startDate, stopDate) {
         var dateArray = [];
@@ -41,11 +41,9 @@ angular.module("services").factory("uiProvider", ['$http', function ($http) {
 
     return {
 
-        data: null,
+        employees: "", // Employees data... {Name, comments, daysOfVacation}+
 
-        tabs: [],
-
-        DatesComments: [],
+        employeesTabs : [],
 
         inputError: "",
 
@@ -53,12 +51,14 @@ angular.module("services").factory("uiProvider", ['$http', function ($http) {
 
         isActive: false,
 
-        selected: "",
+        selectedEmployee: "",
 
         activateSideTab: false,
 
         outerScope: false,
 
+        showConfig : false,
+        
         calculateDaysLeft: function (dateFrom, dateTo) {
             return calcDaysLeft(dateFrom, dateTo);
         },
@@ -75,194 +75,284 @@ angular.module("services").factory("uiProvider", ['$http', function ($http) {
             return _isWorkingDay(day);
         },
 
-        fetchData: function () {
-            var t = this;
-            $http.get("./data.json").success(function (d) {
-                t.data = d;
-            });
+        fetchEmployees: function () {
+            var $this = this;
+            $http.get("/fetchEmployees").success(function (results) {
+                $this.employees = results;
+            }.bind(this));
         },
 
-        addTab: function (scope, $index) {
-            if (this.tabs.indexOf(scope.i) === -1) {
-                this.tabs.push(scope.i);
-                this.selected = scope.i.Name;
+        showEmployee: function (id) {
+            this.selectedEmployee = id;
+            if (this.employeesTabs.indexOf(this.getSelectedEmployee()) === -1) {
+                this.employeesTabs.push(this.getSelectedEmployee());
+                this.selectedEmployee = this.getSelectedEmployee()._id;
             }
-            if(this.selected != scope.i.Name){
-                this.selected = scope.i.Name;
-            }
+            this.employeesTabs = _.uniq(this.employeesTabs, "_id");
+            this.calculateDates();
+
         },
 
-        toggle: function () {
-            return this.isActive = !this.isActive;
+        getLastSavedEmployeeId: function () {
+            $http.get("/getLastSavedEmployee").success(function (results) {
+                this.selectedEmployee = results[0]._id;
+
+            }.bind(this));
         },
 
-        removeTab: function ($index, scope) {
-            this.tabs.splice($index, 1);
-            if (($index) === this.tabs.length) {
-                return false;
-            }
+        query: function (url, data) {
+            return $http({url: url, method: "POST", withCredentials: true, data: data});
         },
 
-        dataMenu: function (scope) {
-            if (this.selected === scope.i.Name) {
-                this.selected = null;
-            } else {
-                this.selected = scope.i.Name;
-            }
-        },
-
-        getData: function (scope) {
-            for (var i = 0; i < this.tabs.length; i++) {
-                if (this.selected === this.tabs[i].Name) {
-                    return this.tabs[i];
+        getSelectedEmployee: function () {
+            for (var i = 0; i < this.employees.length; i++) {
+                if (this.selectedEmployee === this.employees[i]._id) {
+                    return this.employees[i];
                 }
             }
             return null;
         },
 
-        // addNew Employee
+        getEmployees: function (id) {
+            for (var i = 0; i < this.employees.length; i++) {
+                if (id === this.employees[i]._id) {
+                    return this.employees[i];
+                }
+            }
+            return null;
+        },
 
-        addNew: function () {
-            var userData = {
-                "Name": $('.nameClass > input').val(),
+        getEmployee: function () {
+            for (var i = 0; i < this.employees.length; i++) {
+                if (this.selectedEmployee === this.employees[i]._id) {
+                    return this.employees[i];
+                }
+            }
+            return null;
+        },
+
+        // Remove Tab
+        removeEmployeeTab: function ($index) {
+
+            if(this.employeesTabs.length === 1){
+                this.selectedEmployee = "";
+                this.employeesTabs.splice(0, 1);
+            }
+
+            if(this.employeesTabs.length > 1) {
+                if($index === 0) {
+                    if(this.selectedEmployee != this.employeesTabs[$index]._id){
+                        this.employeesTabs.splice($index, 1);
+                        return true;
+                    }
+                    this.selectedEmployee = this.employeesTabs[$index + 1]._id;
+                    this.employeesTabs.splice($index, 1);
+                    return true;
+                }
+
+                if($index > 0){
+                    if($index === this.employeesTabs.length - 1 && this.selectedEmployee === ""){
+                        if(this.employeesTabs.length > 1){
+                            this.selectedEmployee = this.employeesTabs[$index - 1]._id;
+                        }
+                        this.employeesTabs.splice($index, 1);
+                        return true;
+                    }
+
+                    if(this.employeesTabs[$index + 1] != undefined){
+                        if(this.selectedEmployee === this.employeesTabs[$index]._id){
+                            this.employeesTabs.splice($index, 1);
+                            this.selectedEmployee = this.employeesTabs[$index]._id;
+                        }else{
+                            this.employeesTabs.splice($index, 1);
+                        }
+                        return true;
+                    }
+                    if(this.employeesTabs[$index - 1] != undefined){
+                        if(this.selectedEmployee === this.employeesTabs[$index]._id){
+                            this.employeesTabs.splice($index, 1);
+                            this.selectedEmployee = this.employeesTabs[$index-1]._id;
+                        }else{
+                            this.employeesTabs.splice($index, 1);
+                        }
+                        return true;
+                    }
+                    this.employeesTabs.splice($index, 1);
+                }else{
+                    this.selectedEmployee = "";
+                    this.employeesTabs.splice($index, 1);
+                }
+
+            }
+
+        },
+
+        toggleTab: function (scope) {
+            if(this.showConfig === true){
+                this.showConfig = false;
+            }
+            if (this.selectedEmployee === scope.i._id) {
+                this.selectedEmployee = null;
+            } else {
+                this.selectedEmployee = scope.i._id;
+            }
+        },
+
+        // addNew Employee.
+        addNewEmployee: function (name) {
+            var employeeData = {
+                "Name": name,
                 "Adresa": "",
                 "DatumRodjenja": "",
                 "BrojDanaOdmora": "",
-                //"DatumUzimanjaOdmora" : "",
-                "BrojUzetihRadnihDana": Number(""),
-                "Komentar1": "",
-                "OstaloDana": Number(""),
-                "DatesComments": [],
-                "Company" : "",
-                "daysTaken" : 0,
-                "Komentar2": ""
+                "Komentar": "",
+                "Firma" : "",
+                "OstaloDana" : 0,
+                "Absentee" : []
             };
-            if (userData.Name.length === 0) {
+
+            if (employeeData.Name.length === 0) {
                 this.inputError = true;
                 return false;
             }
 
-            this.selected = userData.Name;
-            if(this.selected === userData.Name){
-                this.tabs.push(userData);
+            this.query('/addNewEmployee', employeeData).success(function(data) {
+                this.selectedEmployee = data._id;
+                this.employeesTabs.push(data);
+                this.fetchEmployees();
+            }.bind(this));
+        },
+
+        addEmployeeAbsenteeData : function () {
+            this.getEmployee().Absentee.push({
+                date: $('.dates').val(),
+                typeOfVacation: $('.typeOfVacation').val(),
+                comment: $('.comments').val(),
+                dateTo: $('.dateTo').val()
+            });
+        },
+
+        saveEmployeeData : function() {
+            event.preventDefault();
+
+            var id = this.getEmployee()._id;
+            var empData = {
+                "_id" : id,
+                "Adresa": this.getEmployee().Name,
+                "DatumRodjenja": this.getEmployee().DatumRodjenja,
+                "BrojDanaOdmora": this.getEmployee().BrojDanaOdmora,
+                "Komentar": this.getEmployee().Komentar,
+                "Firma" : this.getEmployee().Firma,
+                "Absentee" : this.getEmployee().Absentee
+            };
+
+            for (var i = 0; i < empData.Absentee.length; i++) {
+                if (empData.Absentee[i].date === undefined) {
+                    return false;
+                }
             }
 
-            this.data.push(userData);
-            return $http({url: '/save', method: "POST", withCredentials: true, data: userData});
+            this.query('/saveEmployeeData', empData);
         },
 
         inputValidation: function () {
             return this.inputError = false;
         },
 
-        saveData: function (scope) {
-            event.preventDefault();
-            var data = {
-                "Name": this.getData().Name,
-                "Adresa": this.getData().Adresa,
-                "DatumRodjenja": this.getData().DatumRodjenja,
-                "BrojDanaOdmora": this.getData().BrojDanaOdmora,
-                //"DatumUzimanjaOdmora" : this.fixDates(this.getData().DatumUzimanjaOdmora),
-                "BrojUzetihRadnihDana": Number(this.getData().BrojUzetihRadnihDana),
-                "Komentar1": this.getData().Komentar1,
-                "OstaloDana": Number(this.getData().OstaloDana),
-                "DatesComments": this.getData().DatesComments,
-                "Company" : this.getData().Company,
-                "Komentar2": this.getData().Komentar2
-            };
-
-            for (var i = 0; i < data.DatesComments.length; i++) {
-                if (data.DatesComments[i].date === undefined && data.DatesComments[i].comment === undefined) {
-                    return false;
-                }
-            }
-
-            return $http({url: '/save', method: "POST", withCredentials: true, data: data});
-        },
-
-        removeName: function () {
+        removeEmployee: function () {
             event.preventDefault();
             if (confirm('Da li ste sigurni da zelite izbrisete zaposlenog?')) {
                 var data = {
-                    Name: this.selected
+                    _id: this.selectedEmployee
                 };
                 JSON.stringify(data);
-                for (var i = 0; i < this.data.length; i++) {
-                    if (this.data[i].Name === data.Name) {
-                        this.data.splice(i, 1);
+                for (var i = 0; i < this.employees.length; i++) {
+                    if (this.employees[i]._id === data._id) {
+                        this.employees.splice(i, 1);
                     }
                 }
-                this.tabs.splice(this.tabs.indexOf(this.selected), 1);
-                return $http({url: '/remove', method: "POST", withCredentials: true, data: data});
+
+                this.employeesTabs.forEach(function(val, i) {
+                    if(val._id === this.selectedEmployee){
+                        this.employeesTabs.splice(i, 1);
+                    }
+                }.bind(this));
+
+                return $http({url: '/removeEmployee', method: "POST", withCredentials: true, data: data});
             } else {
                 return false;
             }
         },
 
-        addDate: function () {
-            event.preventDefault();
-            return this.getData().DatesComments.push({
-                date: $('.date').val(),
-                typeOfVacation: $('.typeOfVacation').val(),
-                comment: $('.comment').val(),
-                daysTaken : 0,
-                dateTo: $('.dateTo').val()
-            });
+
+        days : function(datesComments){
+            return this.getDates(datesComments.date, datesComments.dateTo);
+        },
+
+        workingDays : function(days){
+            return _countWorkingDays(days);
+        },
+
+        areDatesDefined : function(datesComments){
+            if(datesComments.date && datesComments.dateTo){
+                if(datesComments.daysTaken === 0){
+                    datesComments.daysTaken = this.countWorkingDays(this.days(datesComments));
+                    return false;
+                }else{
+                    datesComments.daysTaken = this.countWorkingDays(this.days(datesComments))
+                }
+            }
         },
 
         calculateDates: function () {
-            var ostaloDana = Number(this.getData().BrojDanaOdmora);
-            var datesComments = this.getData().DatesComments;
+            var ostaloDana = Number(this.getSelectedEmployee().BrojDanaOdmora);
+            var datesComments = this.getSelectedEmployee().Absentee;
             var sumUsedWorkingDays = 0;
+            var slobodniDaniCounter = 0;
+
             for (var i = 0; i < datesComments.length; i++) {
-                if (datesComments[i].date === undefined) {
-                    break;
-                }
-                var dateFrom = datesComments[i].date.split('/'),
-                    dateTo = datesComments[i].dateTo.split('/');
+
+                if(datesComments[i].date === undefined) break;
+                var dateFrom = datesComments[i].date.split('/');
+
                 if (dateFrom[2] === moment().format('YYYY')) {
                     if (datesComments[i].typeOfVacation === 'Odmor') {
-                        var days = this.getDates(datesComments[i].date, datesComments[i].dateTo);
-                        var workingDays = _countWorkingDays(days);
-                        sumUsedWorkingDays = sumUsedWorkingDays + workingDays;
-                        if(datesComments[i].date && datesComments[i].dateTo){
-                            if(datesComments[i].daysTaken === 0){
-                                datesComments[i].daysTaken = this.countWorkingDays(days);
-                                break;
-                            }else{
-                                datesComments[i].daysTaken = this.countWorkingDays(days);
-                            }
-                        }
+                        sumUsedWorkingDays = sumUsedWorkingDays + this.workingDays(this.days(datesComments[i]));
+                        this.areDatesDefined(datesComments[i]);
+                    }
+                    else if(datesComments[i].typeOfVacation === 'SlobodniRadniDan'){
+                        slobodniDaniCounter++;
                     }
                 }
             }
 
-            this.getData().OstaloDana = ostaloDana - sumUsedWorkingDays;
+            this.getSelectedEmployee().OstaloDana = ostaloDana - sumUsedWorkingDays;
+            this.getSelectedEmployee().BrojUzetihRadnihDana = slobodniDaniCounter;
         },
 
-        typeOfVacation : function(typeOfVacation) {
-            return typeOfVacation;
-        },
-
-        calculateSlobodneDane : function () {
-            var counter = 0;
-            var datesComments = this.getData().DatesComments;
-            for (var i = 0; i < datesComments.length; i++) {
-                if (datesComments[i].date != undefined) {
-                    var dateSplit = datesComments[i].date.split('/');
-                    if (dateSplit[2] === moment().format('YYYY')) {
-                        //'SlobodniRadniDan'
-                        if (datesComments[i].typeOfVacation === this.typeOfVacation('SlobodniRadniDan')) {
-                            counter++;
-                        }
-                    }
-                }
+        toggleConfig : function(){
+            this.showConfig = !this.showConfig;
+            if(this.selectedEmployee != ""){
+                this.selectedEmployee = "";
             }
-            this.getData().BrojUzetihRadnihDana = counter;
+        },
+
+        removeAbsenteeRow : function(id){
+            $http({url: '/removeAbsenteeRow', method: "POST", withCredentials: true, data: this.getEmployee()});
+        },
+
+        saveRow : function() {
+            this.saveEmployeeData();
         }
+
+        //showListOfAllEmployees : function() {
+        //    $http({url: '/fetchEmployees', method: "GET"}).success(function(data) {
+        //        for(var i = 0; i < data.length; i++){
+        //            console.log(data[i]);
+        //        }
+        //    });
+        //}
 
     };
 }]);
-
-
 
