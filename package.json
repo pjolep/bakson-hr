@@ -27,7 +27,7 @@
   },
   "scripts": {
     "prestart": "npm install",
-    "postinstall": "bower cache clean && bower install",
+    "postinstall": "export HOME=/var/lib/openshift/[instance-id]/app-root/runtime/repo; ./node_modules/bower/bin/bower install",
     "start": "node express.js",
     "pretest": "npm install",
     "test": "karma start karma.conf.js",
@@ -53,7 +53,6 @@
     "body-parser" : "latest",
     "underscore" : "latest",
     "path" : "latest",
-    "http-server": "^0.6.1",
-    "postinstall": "export HOME=/var/lib/openshift/[instance-id]/app-root/runtime/repo; ./node_modules/bower/bin/bower install"
+    "http-server": "^0.6.1"
   }
 }
