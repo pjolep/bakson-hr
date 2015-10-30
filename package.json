@@ -1,4 +1,5 @@
 {
+  "main": "express.js",
   "name": "Employee",
   "private": true,
   "version": "0.0.0",
@@ -28,7 +29,6 @@
   },
   "scripts": {
     "prestart": "npm install",
-    "main": "node express.js",
     "pretest": "npm install",
     "test": "karma start karma.conf.js",
     "test-single-run": "karma start karma.conf.js  --single-run",
